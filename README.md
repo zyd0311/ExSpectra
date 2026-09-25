@@ -71,12 +71,12 @@ than embedded experiment settings.
 
 ## Module map
 
-* `exspectra.displacement` — focal SGD displacement and reference anchor;
-* `exspectra.influence` — score-function estimates and shared CAUD vectors;
-* `exspectra.caud` — exact branch decomposition and structural score assembly;
-* `exspectra.audit` — positive-support probe draws and matched branch labels;
-* `exspectra.calibration` — temporally valid weighted ridge residual fitting;
-* `exspectra.allocation` — sequential score/uniform mixture sampling.
+* `displacement` — focal SGD displacement and reference anchor;
+* `influence` — score-function estimates and shared CAUD vectors;
+* `caud` — exact branch decomposition and structural score assembly;
+* `audit` — positive-support probe draws and matched branch labels;
+* `calibration` — temporally valid weighted ridge residual fitting;
+* `allocation` — sequential score/uniform mixture sampling.
 
 The modules accept arrays or tensors supplied by the host learner. They do not
 choose a QMIX architecture, optimizer, horizon, evaluation temperature, probe
@@ -89,12 +89,10 @@ An external learner can import the components and provide its own gradients,
 autodiff products, branch runner, and evaluation function:
 
 ```python
-from exspectra import (
-    build_shared_coefficients,
-    candidate_displacement,
-    sequential_mixture_sample,
-    structural_score,
-)
+from influence import build_shared_coefficients
+from displacement import candidate_displacement
+from allocation import sequential_mixture_sample
+from caud import structural_score
 
 coefficients = build_shared_coefficients(
     g_focal, curvature_rr, curvature_rt, sensitivity_own, sensitivity_response

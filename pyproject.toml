@@ -12,5 +12,12 @@ dependencies = ["numpy>=1.24"]
 [project.optional-dependencies]
 torch = ["torch>=2.0"]
 
-[tool.setuptools.packages.find]
-include = ["exspectra*"]
+[tool.setuptools]
+py-modules = [
+    "allocation",
+    "audit",
+    "calibration",
+    "caud",
+    "displacement",
+    "influence",
+]
